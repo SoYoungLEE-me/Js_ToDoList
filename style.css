@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  background-image: url("images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  background-color: white;
+  min-height: 100vh;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.task-area {
+  border: 1px solid lightgray;
+  margin-top: 2em;
+}
+
+.task-tabs {
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  position: relative;
+}
+.task-tabs div {
+  padding: 1em;
+}
+
+#under-line {
+  height: 4px;
+  background-color: pink;
+  position: absolute;
+  width: 70px;
+  left: 0px;
+  top: 52px;
+  padding: 0px;
+  transition: 0.5s;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  position: relative;
+}
+
+.task span {
+  padding: 1em;
+}
+
+.task-done {
+  text-decoration: line-through;
+  background-color: lightgray;
+  transition: 0.5s;
+}
+
+.button-box button {
+  height: 100%;
+  border: none;
+  width: 5em;
+  margin: 0;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.button-box {
+  display: flex;
+}
+
+.button-box button :active {
+  position: relative;
+  top: 2px;
+} /*버튼 클릭했을 때 아이콘 살짝 눌리는 효과*/
+
+.button-box button:first-child:hover {
+  background-color: greenyellow;
+}
+
+.button-box button:nth-child(2):hover {
+  background-color: rgb(255, 0, 0, 0.3); /*콜론 앞에 공백 있으면 안된디야*/
+}
+
+.fa-check {
+  color: limegreen;
+}
+
+.fa-trash-can {
+  color: red;
+}
+
+.fa-rotate-left {
+  color: lightslategray;
+}
+
+.task-tabs div {
+  cursor: pointer;
+}
