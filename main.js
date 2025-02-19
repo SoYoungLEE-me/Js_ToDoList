@@ -23,12 +23,19 @@ for (let i = 1; i < tabs.length; i++) {
 
 function addTask() {
   let task = {
-    id: rendomIdGenerate(),
+    id: randomIdGenerate(),
     taskContent: taskInput.value,
     isComplete: false,
   };
+
+  if (!taskInput.value.trim()) {
+    alert("할 일을 입력하세요!");
+    return;
+  }
+
   taskList.push(task);
   console.log(taskList);
+  taskInput.value = "";
   filter({ target: { id: mode } });
 }
 
@@ -40,20 +47,23 @@ function render() {
     list = filterList;
   }
   let resultHTML = "";
+
   for (let i = 0; i < list.length; i++) {
     if (list[i].isComplete == true) {
       resultHTML += ` <div class="task task-done">
-            <span>${list[i].taskContent}</span>
+            <span id="task-${list[i].id}">${list[i].taskContent}</span>
             <div class="button-box">
               <button onclick = "toggleComplete('${list[i].id}')"><i class="fa-solid fa-rotate-left"></i></button>
+              <button onclick = "editTodo('${list[i].id}')"><i class="fa-solid fa-pen"></i></button>
               <button onclick = "deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           </div>`;
     } else {
       resultHTML += ` <div class="task">
-            <span>${list[i].taskContent}</span>
+            <span id="task-${list[i].id}">${list[i].taskContent}</span>
             <div class="button-box">
               <button onclick = "toggleComplete('${list[i].id}')"><i class="fa-solid fa-check"></i></button>
+              <button onclick = "editTodo('${list[i].id}')"><i class="fa-solid fa-pen"></i></button>
               <button onclick = "deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           </div>`;
@@ -81,6 +91,49 @@ function deleteTask(id) {
     }
   }
   filter();
+}
+
+function editTodo(id) {
+  let taskItem = taskList.find((task) => task.id === id); //taskList에서 해당
+  if (!taskItem) return;
+
+  let taskElement = document.getElementById(`task-${id}`); //span 요소 가져오기
+  if (!taskElement) return;
+
+  if (taskItem.isComplete) return;
+
+  //input 요소 생성
+  let inputElement = document.createElement("input");
+  inputElement.type = "text";
+  inputElement.className = "input_style";
+  inputElement.value = taskItem.taskContent;
+
+  //enter를 치면 update 함수(배열 업데이트) 실행
+  inputElement.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      updateTodo(id, inputElement.value);
+    }
+  });
+
+  //기존 <span>을 <input>으로 교체
+  taskElement.replaceWith(inputElement);
+  inputElement.focus(); //입력창에 자동으로 포커스 맞추기
+}
+
+function updateTodo(id, newContent) {
+  if (!newContent.trim()) {
+    alert("할 일을 입력하세요!");
+    return;
+  }
+
+  taskList = taskList.map(
+    (
+      task //맵으로 기존 배열 순회
+    ) => (task.id === id ? { ...task, taskContent: newContent } : task)
+  ); // taskList에서 해당 id의 내용을 새로운 내용이 있다면 ...task로 다른 요소들은 복사,
+  //taskContent만 newContent로 교체에서 반환
+
+  render();
 }
 
 function filter(event) {
@@ -118,6 +171,6 @@ function filter(event) {
   }
 }
 
-function rendomIdGenerate() {
+function randomIdGenerate() {
   return "_" + Math.random().toString(36).substr(2, 9);
 }

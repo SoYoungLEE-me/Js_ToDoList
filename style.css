@@ -78,6 +78,10 @@ body {
 }
 
 .button-box button:nth-child(2):hover {
+  background-color: rgba(50, 136, 255, 0.3); /*콜론 앞에 공백 있으면 안된디야*/
+}
+
+.button-box button:nth-child(3):hover {
   background-color: rgb(255, 0, 0, 0.3); /*콜론 앞에 공백 있으면 안된디야*/
 }
 
@@ -93,6 +97,35 @@ body {
   color: lightslategray;
 }
 
+.fa-pen {
+  color: #2779d1;
+}
+
+.task-done .fa-pen {
+  opacity: 0.3; /* 완료된 항목의 펜 아이콘 흐리게 표시 */
+  pointer-events: none; /* 클릭 자체를 막기 */
+}
+
 .task-tabs div {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .button-box button {
+    width: 3.5em;
+    font-size: 0.8em;
+    padding: 0.5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .button-box button {
+    width: 3em;
+    font-size: 0.7em;
+    padding: 0.4em;
+  }
+
+  .task span {
+    font-size: 0.9em;
+  }
 }
