@@ -3,25 +3,87 @@ body {
   background-image: url("images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /*모바일에서 화면이 너무 꽉차는걸 방지*/
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
   background-color: white;
-  min-height: 100vh;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  width: 50%;
+  min-width: 600px;
+  min-height: 70vh;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 3em auto;
+
+  position: relative; /* 위치 조절을 위해 설정 */
+  top: -30px;
 }
 
-.task-area {
+.input-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box; /* 부모 컨테이너를 넘지 않도록 */
+  max-width: 100%; /* 컨테이너를 벗어나지 않도록 설정 */
+}
+
+#task-input {
+  flex-grow: 1;
+  padding: 12px;
   border: 1px solid lightgray;
-  margin-top: 2em;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  outline: none;
+  font-size: 16px;
+}
+
+#add-button {
+  background-color: pink;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+}
+
+#add-button:hover {
+  background-color: rgb(240, 131, 149);
+}
+
+.title {
+  font-weight: 550;
+}
+.task-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
 }
 
 .task-tabs {
   display: flex;
-  border-bottom: 1px solid lightgray;
+  background-color: #ffffff;
   position: relative;
+  border-bottom: 1px solid #e0e0e0;
 }
+
 .task-tabs div {
   padding: 1em;
 }
@@ -40,9 +102,16 @@ body {
 .task {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  border-bottom: 1px solid lightgray;
-  position: relative;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.task span {
+  flex-grow: 1; /* 자동으로 남은 공간 차지 */
+  text-align: left;
+  padding-left: 10px; /* 체크박스와의 간격 */
 }
 
 .task span {
@@ -55,17 +124,23 @@ body {
   transition: 0.5s;
 }
 
-.button-box button {
-  height: 100%;
-  border: none;
-  width: 5em;
-  margin: 0;
-  background-color: white;
-  transition: 0.5s;
+.task-done .button-box button {
+  background-color: lightgray; /* 버튼 영역을 항상 흰색으로 유지 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  padding: 5px;
+  transition: 0.3s;
 }
 
 .button-box {
   display: flex;
+}
+
+.button-box button {
+  height: 100%;
+  border: none;
+  width: 4em;
+  margin: 0;
+  background-color: white;
 }
 
 .button-box button :active {
@@ -73,41 +148,61 @@ body {
   top: 2px;
 } /*버튼 클릭했을 때 아이콘 살짝 눌리는 효과*/
 
-.button-box button:first-child:hover {
-  background-color: greenyellow;
-}
-
-.button-box button:nth-child(2):hover {
-  background-color: rgba(50, 136, 255, 0.3); /*콜론 앞에 공백 있으면 안된디야*/
-}
-
-.button-box button:nth-child(3):hover {
-  background-color: rgb(255, 0, 0, 0.3); /*콜론 앞에 공백 있으면 안된디야*/
-}
-
-.fa-check {
-  color: limegreen;
-}
-
 .fa-trash-can {
-  color: red;
+  color: rgb(155, 155, 155);
 }
 
-.fa-rotate-left {
-  color: lightslategray;
+.fa-trash-can:hover {
+  color: rgb(255, 26, 64);
 }
 
 .fa-pen {
-  color: #2779d1;
+  color: rgb(155, 155, 155);
+}
+
+.fa-pen:hover {
+  color: rgb(22, 96, 255);
 }
 
 .task-done .fa-pen {
-  opacity: 0.3; /* 완료된 항목의 펜 아이콘 흐리게 표시 */
+  opacity: 0.2; /* 완료된 항목의 펜 아이콘 흐리게 표시 */
   pointer-events: none; /* 클릭 자체를 막기 */
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.task-checkbox:hover {
+  transform: scale(1.1); /* 살짝 커지게 */
+}
+
+.task-checkbox:checked {
+  accent-color: rgb(248, 88, 88);
 }
 
 .task-tabs div {
   cursor: pointer;
+}
+
+.input_style {
+  width: 90%;
+  padding: 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.input_style:focus {
+  box-shadow: 0 0 5px rgba(59, 121, 61, 0.3);
 }
 
 @media screen and (max-width: 768px) {
@@ -115,6 +210,12 @@ body {
     width: 3.5em;
     font-size: 0.8em;
     padding: 0.5em;
+  }
+
+  .container {
+    width: 80%;
+    min-width: unset;
+    padding: 1.5rem;
   }
 }
 
@@ -127,5 +228,50 @@ body {
 
   .task span {
     font-size: 0.9em;
+  }
+
+  .container {
+    width: 88%;
+    min-width: unset;
+    border-radius: 10px;
+    padding: 1.2rem;
+    top: -10px;
+  }
+
+  .input-area {
+    padding: 6px; /* 더 작은 패딩 */
+  }
+
+  #task-input {
+    font-size: 13px; /* 더 작은 화면에서 글자 크기 축소 */
+    padding: 6px; /* 입력창 패딩 줄이기 */
+  }
+
+  #add-button {
+    font-size: 13px; /* 버튼 글자 크기 조정 */
+    padding: 6px 12px; /* 버튼 크기 줄이기 */
+  }
+
+  .task-area {
+    padding: 8px; /* 패딩 줄이기 */
+    gap: 6px; /* 리스트 간격 축소 */
+    min-height: 150px; /* 최소 높이 줄이기 */
+  }
+
+  .task {
+    padding: 10px; /* 개별 할 일 아이템 패딩 줄이기 */
+  }
+
+  .task span {
+    font-size: 12px; /* 글자 크기 줄이기 */
+  }
+
+  .task-tabs {
+    font-size: 12px;
+  }
+
+  #under-line {
+    height: 3px; /* 모바일에서는 줄을 더 얇게 */
+    top: 40px; /* 글자가 작아질 때 언더라인 위치 맞춤 */
   }
 }
