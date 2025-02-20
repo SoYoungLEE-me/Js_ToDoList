@@ -146,42 +146,14 @@ function updateTodo(id, newContent) {
   render();
 }
 
-//언더라인 크기와 위치를 업데이트하는 함수부분 추가
-
-function updateUnderline(element) {
-  underLine.style.width = `${element.offsetWidth}px`;
-  underLine.style.left = `${element.offsetLeft}px`;
-  underLine.style.top = `${element.offsetTop + element.offsetHeight - 4}px`;
-}
-
-// 페이지 로드 시 기본 탭("All")에 언더라인 설정
-document.addEventListener("DOMContentLoaded", function () {
-  let defaultTab = document.getElementById("all");
-  if (defaultTab) {
-    defaultTab.classList.add("active");
-    updateUnderline(defaultTab);
-  }
-});
-
-// 화면 크기가 변경될 때 언더라인 자동 조정
-window.addEventListener("resize", function () {
-  let activeTab = document.querySelector(".task-tabs div.active");
-  if (activeTab) {
-    updateUnderline(activeTab);
-  }
-});
-
 // 필터 함수 (탭 클릭 시 언더라인 이동)
 function filter(event) {
   if (event) {
-    mode = event.target.id; // 클릭된 탭의 ID 가져오기
-    updateUnderline(event.target);
-
-    // 기존 `active` 클래스 제거 후 현재 클릭된 탭에 추가
-    document
-      .querySelectorAll(".task-tabs div")
-      .forEach((tab) => tab.classList.remove("active"));
-    event.target.classList.add("active");
+    mode = event.target.id; //html 태그 안에 있는 id들
+    underLine.style.width = event.target.offsetWidth + "px";
+    underLine.style.left = event.target.offsetLeft + "px";
+    underLine.style.top =
+      event.target.offsetTop + (event.target.offsetHeight - 4) + "px";
   }
 
   // 필터링된 리스트 적용
@@ -189,6 +161,8 @@ function filter(event) {
   if (mode === "all") {
     render();
   } else if (mode === "ongoing") {
+    //진행중인 리스트만 보여주기
+    //addTask.isComplete == false
     for (let i = 0; i < taskList.length; i++) {
       if (!taskList[i].isComplete) {
         filterList.push(taskList[i]);
@@ -196,12 +170,13 @@ function filter(event) {
     }
     render();
   } else if (mode === "done") {
+    //끝난 리스트만 보여주기
+    //addTask.isComplete == true
     for (let i = 0; i < taskList.length; i++) {
-      if (taskList[i].isComplete) {
+      if (taskList[i].isComplete == true) {
         filterList.push(taskList[i]);
       }
     }
-    render();
   }
 }
 
