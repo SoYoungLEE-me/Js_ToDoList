@@ -191,6 +191,7 @@ body {
 
 .input_style {
   width: 90%;
+  height: 7vh;
   padding: 20px;
   font-size: 16px;
   border: none;
@@ -213,7 +214,7 @@ body {
   }
 
   .container {
-    width: 80%;
+    width: 100%;
     min-width: unset;
     padding: 1.5rem;
   }
@@ -231,7 +232,7 @@ body {
   }
 
   .container {
-    width: 88%;
+    width: 100%;
     min-width: unset;
     border-radius: 10px;
     padding: 1.2rem;
@@ -243,35 +244,17 @@ body {
   }
 
   #task-input {
-    font-size: 13px; /* 더 작은 화면에서 글자 크기 축소 */
+    font-size: 15px; /* 더 작은 화면에서 글자 크기 축소 */
     padding: 6px; /* 입력창 패딩 줄이기 */
   }
 
   #add-button {
-    font-size: 13px; /* 버튼 글자 크기 조정 */
+    font-size: 14px; /* 버튼 글자 크기 조정 */
     padding: 6px 12px; /* 버튼 크기 줄이기 */
   }
 
-  .task-area {
-    padding: 8px; /* 패딩 줄이기 */
-    gap: 6px; /* 리스트 간격 축소 */
-    min-height: 150px; /* 최소 높이 줄이기 */
-  }
-
-  .task {
-    padding: 10px; /* 개별 할 일 아이템 패딩 줄이기 */
-  }
-
-  .task span {
-    font-size: 12px; /* 글자 크기 줄이기 */
-  }
-
-  .task-tabs {
-    font-size: 12px;
-  }
-
-  #under-line {
-    height: 3px; /* 모바일에서는 줄을 더 얇게 */
-    top: 40px; /* 글자가 작아질 때 언더라인 위치 맞춤 */
+  .input_style {
+    font-size: 15px;
+    height: 5vh;
   }
 }
