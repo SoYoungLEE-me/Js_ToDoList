@@ -177,6 +177,7 @@ function filter(event) {
         filterList.push(taskList[i]);
       }
     }
+    render();
   }
 }
 
