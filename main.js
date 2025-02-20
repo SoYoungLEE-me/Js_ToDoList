@@ -21,6 +21,12 @@ for (let i = 1; i < tabs.length; i++) {
   });
 }
 
+taskInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
+});
+
 function addTask() {
   let task = {
     id: randomIdGenerate(),
@@ -114,6 +120,10 @@ function editTodo(id) {
       updateTodo(id, inputElement.value);
     }
   });
+
+  inputElement.addEventListener("blur", function () {
+    updateTodo(id, inputElement.value);
+  }); //input창의 포커스가 해제되면 수정될 수 있게 기능 추가
 
   //기존 <span>을 <input>으로 교체
   taskElement.replaceWith(inputElement);
